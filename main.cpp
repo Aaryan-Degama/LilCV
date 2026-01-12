@@ -10,20 +10,20 @@
 
 int main(int argc, char* argv[]){
     CLI::App app{"LilCV"};
-    std::string iofile,oofile;
+    std::string ifile,ofile;
     std::string cmd;
     double intensity{1};
     int size{1};
 
     app.add_option(
         "Input_file",
-        iofile,
+        ifile,
         "Input file"
     )->required();
 
     app.add_option(
         "Output_file",
-        oofile,
+        ofile,
         "Output file"
     )->required();
 
@@ -43,22 +43,17 @@ int main(int argc, char* argv[]){
 
     CLI11_PARSE(app,argc,argv);
 
-    std::ifstream ifile(iofile);
-    std::ofstream ofile(oofile);
+    Image real_image = loadPPM(ifile);
 
-    if(!ifile.is_open()){
-        std::cerr<<"Unable to open input file\n";
-        return 1;
-    }
-    if(!ofile.is_open()){
-        std::cerr<<"Unable to open output file\n";
-    }
+    
 
-    std::unordered_map<std::string,std::function<void()>> cmd_map = {
-        {"bf",      [&](){ bf(ifile, ofile,intensity); }},
-        {"1",       [&](){ bf(ifile, ofile,intensity); }},
-        {"blur",    [&](){ blur(ifile,ofile,intensity); }},
-        // {"rf",   [&](){ redfilter(ifile,ofile,intensity); }},
+ 
+
+    std::unordered_map<std::string,std::function<Image()>> cmd_map = {
+        {"bw",      [&](){ return bw(real_image); }},
+        {"1",       [&](){ return bw(real_image); }},
+        {"blur",    [&](){ return blur(real_image,intensity); }},
+        // {"rf",      [&](){ redfilter(ifile,ofile,intensity); }},
         // {"2",           [&](){ redfilter(ifile,ofile,intensity); }},
         // {"rf", [&](){ greenfilter(ifile,ofile,intensity); }},
         // {"3",           [&](){ greenfilter(ifile,ofile,intensity); }},
@@ -68,7 +63,8 @@ int main(int argc, char* argv[]){
 
     auto it = cmd_map.find(cmd);
     if(it != cmd_map.end()){
-        it->second();
+        const Image output = it->second();
+        savePPM(output,ofile);
     }else{
         std::cerr <<"Unknow command: "<< cmd<<'\n';
         return 1;
