@@ -8,12 +8,17 @@
 #include <cmath>
 #include <vector>
 
+struct Pixel{
+    float r,g,b;
+};
+
 class Image{
 private:
-    std::ifstream
+
 public:
     Image(std::string& file);
-
+    int width,height;
+    std::vector<std::vector<Pixel>> pixels(height, std::vector<Pixel>(width));
 
 };
 
