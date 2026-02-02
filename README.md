@@ -57,11 +57,13 @@ LilCV/
 ## 🔧 System Requirements
 
 ### C++
+
 - GCC ≥ 9
 - C++17
 - ONNX Runtime (CPU)
 
 ### Python (ONNX Export Only)
+
 - Python ≥ 3.10
 - PyTorch
 - torchvision
@@ -96,16 +98,19 @@ This generates `midas_small.onnx` in the project root.
 ## ⚙️ ONNX Runtime Installation
 
 ### Fedora
+
 ```bash
 sudo dnf install onnxruntime onnxruntime-devel
 ```
 
 ### Ubuntu/Debian
+
 ```bash
 sudo apt install onnxruntime-dev
 ```
 
 ### Verify Installation
+
 ```bash
 ls /usr/include/onnxruntime/onnxruntime_cxx_api.h
 ```
@@ -122,6 +127,7 @@ g++ -O3 -std=c++17 \
 ## ▶️ Usage
 
 ### General Format
+
 ```bash
 ./lilcv <input.ppm> <output.ppm> <command> [--intensity X] [--width W] [--height H]
 ```
@@ -129,21 +135,25 @@ g++ -O3 -std=c++17 \
 ### Examples
 
 #### 🖤 Grayscale
+
 ```bash
 ./lilcv input.ppm out.ppm bw
 ```
 
 #### 🌫️ Gaussian Blur
+
 ```bash
 ./lilcv input.ppm out.ppm blur --intensity 2.5
 ```
 
 #### 🎯 Depth-Based Blur (Portrait-style)
+
 ```bash
 ./lilcv input.ppm out.ppm depthblur --intensity 3.0
 ```
 
 #### 🔄 Negative Filter
+
 ```bash
 ./lilcv input.ppm out.ppm negative
 ```
@@ -151,22 +161,24 @@ g++ -O3 -std=c++17 \
 #### 📐 Resize Image
 
 Default is 256×256 if no size is given:
+
 ```bash
 ./lilcv input.ppm out.ppm resize
 ```
 
 Custom size:
+
 ```bash
 ./lilcv input.ppm out.ppm resize --width 512 --height 512
 ```
 
 ## 📊 Output Examples
 
-| Input | Depth Map | Depth Blur |
-|-------|-----------|-----------|
+| Input          | Depth Map               | Depth Blur                 |
+| -------------- | ----------------------- | -------------------------- |
 | Original image | Neural depth estimation | Portrait-style blur result |
 
-*Note: Depth maps are relative depth, not metric depth.*
+_Note: Depth maps are relative depth, not metric depth._
 
 ## 🚀 Why This Project Exists
 
@@ -180,7 +192,20 @@ Custom size:
 - ❌ OpenCV
 - ❌ Heavy frameworks
 - ❌ Runtime Python dependencies
-- ❌ Unnecessary abstractions
+## 🚀 Install Globally
+
+To run `lilcv` from any directory:
+
+```bash
+sudo mv lilcv /usr/local/bin/
+```
+
+Then use it anywhere:
+
+```bash
+lilcv input.ppm output.ppm bw
+```
+
 
 ## 🔮 Future Ideas
 
@@ -189,6 +214,5 @@ Custom size:
 - [ ] Real-time webcam pipeline
 - [ ] SIMD acceleration
 - [ ] CUDA backend (optional)
-
 
 **Made with ❤️ for lightweight, transparent ML systems in C++**
