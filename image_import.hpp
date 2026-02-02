@@ -8,6 +8,10 @@
 #include <cmath>
 #include <vector>
 #include <algorithm>
+#include <array>
+
+// ONNX Runtime
+#include <onnxruntime/onnxruntime_cxx_api.h>
 
 struct Pixel{
     float r,g,b;
@@ -19,7 +23,6 @@ private:
     int m_height;
     std::vector<Pixel> pixels; 
 public:
-    // Image(int width,int height)// In image_import.cpp
     Image(int width, int height);
     
     int width() const;
@@ -32,17 +35,26 @@ public:
 Image loadPPM(const std::string& ifile);
 void savePPM(const Image& img,const std::string& ofile);
 
-
-
-//Color filters
+// Color filters
 const Image bw(const Image& img);
-void redfilter(std::ifstream& ifile,std::ofstream& ofile,double& intensity);
-void greenfilter(std::ifstream& ifile,std::ofstream& ofile,double& intensity);
-void bf(std::ifstream& ifile,std::ofstream& ofile);
 
-//Image transformation
-void invert(std::ifstream& ifile,std::ofstream& ofile);
-void threshold(std::ifstream& ifile,std::ofstream& ofile,double& intensity);
+// Blur
 const Image blur(const Image& img,double intensity);
+
+// Depth-based blur
+Image computeDepthMap(const Image& img);
+const Image depthBlur(const Image& img,double intensity);
+
+const Image depthImage(const Image& img);
+
+// Basic transforms
+const Image negetive(const Image& img);
+const Image grayscale(const Image& img);
+
+// Resize
+const Image resize(const Image& img, int newW, int newH);
+
+// Depth output only
+const Image depthImage(const Image& img);
 
 #endif
