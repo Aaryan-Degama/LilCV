@@ -163,7 +163,7 @@ const Image blur(const Image &img, double intensity) {
     return output;
 }
 
-const Image negetive(const Image& img) {
+const Image negative(const Image& img) {
     Image output(img.width(), img.height());
 
     for(int y=0;y<img.height();y++) {

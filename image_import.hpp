@@ -48,7 +48,7 @@ const Image depthBlur(const Image& img,double intensity);
 const Image depthImage(const Image& img);
 
 // Basic transforms
-const Image negetive(const Image& img);
+const Image negative(const Image& img);
 const Image grayscale(const Image& img);
 
 // Resize

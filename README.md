@@ -143,9 +143,9 @@ g++ -O3 -std=c++17 \
 ./lilcv input.ppm out.ppm depthblur --intensity 3.0
 ```
 
-#### 🔄 Invert Colors
+#### 🔄 Negative Filter
 ```bash
-./lilcv input.ppm out.ppm invert
+./lilcv input.ppm out.ppm negative
 ```
 
 #### 📐 Resize Image
@@ -190,10 +190,5 @@ Custom size:
 - [ ] SIMD acceleration
 - [ ] CUDA backend (optional)
 
-## 📝 License
-
-MIT
-
----
 
 **Made with ❤️ for lightweight, transparent ML systems in C++**

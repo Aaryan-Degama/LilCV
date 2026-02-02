@@ -66,7 +66,7 @@ int main(int argc, char* argv[]){
         {"blur",        [&](){ return blur(real_image,intensity); }},
         {"depthblur",   [&](){ return depthBlur(real_image,intensity); }},
         {"depth",       [&](){ return depthImage(real_image); }},
-        {"negetive",    [&](){ return negetive(real_image); }},
+        {"negative",    [&](){ return negative(real_image); }},
         {"resize",      [&](){ return resize(real_image, resize_w, resize_h); }},
     };
 
